@@ -20,7 +20,10 @@ export function validateCheckoutData(formData) {
   }
 
   if (formData.customerPhone.trim()) {
-    const phoneDigits = formData.customerPhone.replace(/\D/g, '');
+    let phoneDigits = formData.customerPhone.replace(/\D/g, '');
+    if (phoneDigits.startsWith('55') && (phoneDigits.length === 12 || phoneDigits.length === 13)) {
+      phoneDigits = phoneDigits.slice(2);
+    }
     if (phoneDigits.length < 10 || phoneDigits.length > 11) {
       errors.customerPhone = 'Informe um telefone com DDD (10 ou 11 dígitos).';
     }

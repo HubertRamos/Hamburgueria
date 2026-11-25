@@ -54,6 +54,7 @@ const state = {
     orderNotes: '',
   },
   checkoutErrors: {},
+  generatedMessage: '',
 };
 
 let toastTimer;
@@ -358,13 +359,13 @@ function openProductModal(productId, triggerEl = null) {
       dialog.close();
       return;
     }
-    if (e.target.id === 'pm-dec') {
+    if (e.target.closest('#pm-dec')) {
       modalQty = Math.max(1, modalQty - 1);
       updateModalPrice();
-    } else if (e.target.id === 'pm-inc') {
+    } else if (e.target.closest('#pm-inc')) {
       modalQty = Math.min(99, modalQty + 1);
       updateModalPrice();
-    } else if (e.target.id === 'pm-add-btn') {
+    } else if (e.target.closest('#pm-add-btn')) {
       const opts = collectOptions();
       cart.addItem(product, opts, modalQty);
       dialog.close();
@@ -432,10 +433,13 @@ function renderCartDrawer() {
                 ${item.options.notes ? `<div class="li-note">Obs.: ${escapeHtml(item.options.notes)}</div>` : ''}
               </div>
               <div class="li-price">${formatBRL(subtotal)}</div>
-              <div class="q">
-                <button type="button" data-cart-dec="${idx}" aria-label="Diminuir ${escapeHtml(item.product.name)}">−</button>
-                <span>${item.quantity}</span>
-                <button type="button" data-cart-inc="${idx}" aria-label="Aumentar ${escapeHtml(item.product.name)}">+</button>
+              <div class="li-actions">
+                <div class="q">
+                  <button type="button" data-cart-dec="${idx}" aria-label="Diminuir ${escapeHtml(item.product.name)}">−</button>
+                  <span>${item.quantity}</span>
+                  <button type="button" data-cart-inc="${idx}" aria-label="Aumentar ${escapeHtml(item.product.name)}">+</button>
+                </div>
+                <button type="button" class="li-remove" data-cart-remove="${idx}" aria-label="Remover ${escapeHtml(item.product.name)} do carrinho">Remover</button>
               </div>
             </div>
           `;
@@ -477,14 +481,14 @@ function renderCartDrawer() {
     <form id="co-form" novalidate>
       <div class="co-field">
         <label for="co-name">Nome completo *</label>
-        <input id="co-name" name="customerName" type="text" required autocomplete="name" value="${escapeHtml(c.customerName)}" class="${e.customerName ? 'invalid' : ''}" placeholder="Seu nome">
-        ${e.customerName ? `<span class="co-err">${escapeHtml(e.customerName)}</span>` : ''}
+        <input id="co-name" name="customerName" type="text" required autocomplete="name" value="${escapeHtml(c.customerName)}" class="${e.customerName ? 'invalid' : ''}" aria-invalid="${e.customerName ? 'true' : 'false'}" ${e.customerName ? 'aria-describedby="err-customerName"' : ''} placeholder="Seu nome">
+        ${e.customerName ? `<span class="co-err" id="err-customerName">${escapeHtml(e.customerName)}</span>` : ''}
       </div>
 
       <div class="co-field">
         <label for="co-phone">Seu WhatsApp / Telefone (opcional)</label>
-        <input id="co-phone" name="customerPhone" type="tel" autocomplete="tel" value="${escapeHtml(c.customerPhone)}" class="${e.customerPhone ? 'invalid' : ''}" placeholder="(00) 00000-0000">
-        ${e.customerPhone ? `<span class="co-err">${escapeHtml(e.customerPhone)}</span>` : ''}
+        <input id="co-phone" name="customerPhone" type="tel" autocomplete="tel" value="${escapeHtml(c.customerPhone)}" class="${e.customerPhone ? 'invalid' : ''}" aria-invalid="${e.customerPhone ? 'true' : 'false'}" ${e.customerPhone ? 'aria-describedby="err-customerPhone"' : ''} placeholder="(00) 00000-0000">
+        ${e.customerPhone ? `<span class="co-err" id="err-customerPhone">${escapeHtml(e.customerPhone)}</span>` : ''}
       </div>
 
       <div class="seg" role="radiogroup" aria-label="Forma de recebimento">
@@ -504,19 +508,19 @@ function renderCartDrawer() {
             <div class="co-grid2">
               <div class="co-field">
                 <label for="co-street">Rua / Avenida *</label>
-                <input id="co-street" name="street" type="text" required autocomplete="street-address" value="${escapeHtml(c.street)}" class="${e.street ? 'invalid' : ''}" placeholder="Ex.: Rua das Palmeiras">
-                ${e.street ? `<span class="co-err">${escapeHtml(e.street)}</span>` : ''}
+                <input id="co-street" name="street" type="text" required autocomplete="street-address" value="${escapeHtml(c.street)}" class="${e.street ? 'invalid' : ''}" aria-invalid="${e.street ? 'true' : 'false'}" ${e.street ? 'aria-describedby="err-street"' : ''} placeholder="Ex.: Rua das Palmeiras">
+                ${e.street ? `<span class="co-err" id="err-street">${escapeHtml(e.street)}</span>` : ''}
               </div>
               <div class="co-field">
                 <label for="co-number">Número *</label>
-                <input id="co-number" name="number" type="text" required value="${escapeHtml(c.number)}" class="${e.number ? 'invalid' : ''}" placeholder="Ex.: 227">
-                ${e.number ? `<span class="co-err">${escapeHtml(e.number)}</span>` : ''}
+                <input id="co-number" name="number" type="text" required value="${escapeHtml(c.number)}" class="${e.number ? 'invalid' : ''}" aria-invalid="${e.number ? 'true' : 'false'}" ${e.number ? 'aria-describedby="err-number"' : ''} placeholder="Ex.: 227">
+                ${e.number ? `<span class="co-err" id="err-number">${escapeHtml(e.number)}</span>` : ''}
               </div>
             </div>
             <div class="co-field">
               <label for="co-neighborhood">Bairro *</label>
-              <input id="co-neighborhood" name="neighborhood" type="text" required value="${escapeHtml(c.neighborhood)}" class="${e.neighborhood ? 'invalid' : ''}" placeholder="Seu bairro">
-              ${e.neighborhood ? `<span class="co-err">${escapeHtml(e.neighborhood)}</span>` : ''}
+              <input id="co-neighborhood" name="neighborhood" type="text" required value="${escapeHtml(c.neighborhood)}" class="${e.neighborhood ? 'invalid' : ''}" aria-invalid="${e.neighborhood ? 'true' : 'false'}" ${e.neighborhood ? 'aria-describedby="err-neighborhood"' : ''} placeholder="Seu bairro">
+              ${e.neighborhood ? `<span class="co-err" id="err-neighborhood">${escapeHtml(e.neighborhood)}</span>` : ''}
             </div>
             <div class="co-field">
               <label for="co-complement">Complemento / Referência</label>
@@ -558,6 +562,15 @@ function renderCartDrawer() {
         <textarea id="co-notes" name="orderNotes" rows="2" maxlength="200" placeholder="Ex.: campainha não funciona, enviar guardanapos...">${escapeHtml(c.orderNotes)}</textarea>
       </div>
     </form>
+
+    ${
+      state.generatedMessage
+        ? `<div class="co-preview" id="co-preview-wrap">
+             <label for="co-preview-text">Mensagem formatada do pedido:</label>
+             <textarea id="co-preview-text" rows="6" readonly>${escapeHtml(state.generatedMessage)}</textarea>
+           </div>`
+        : ''
+    }
   `;
 
   footerEl.innerHTML = `
@@ -623,12 +636,37 @@ function syncStoreContactLinks() {
 }
 
 async function copyOrderSummary(message) {
-  try {
-    await navigator.clipboard.writeText(message);
-    showToast('Resumo do pedido copiado!');
-  } catch {
-    showToast('Não foi possível copiar automaticamente.');
+  state.generatedMessage = message;
+  renderCartDrawer();
+
+  const previewEl = $('#co-preview-text');
+  if (previewEl) {
+    previewEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
+
+  try {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(message);
+      showToast('Resumo do pedido copiado!');
+      return;
+    }
+  } catch {
+    // Continua para fallback manual abaixo
+  }
+
+  if (previewEl) {
+    previewEl.focus();
+    previewEl.select();
+    try {
+      if (document.execCommand('copy')) {
+        showToast('Resumo do pedido copiado!');
+        return;
+      }
+    } catch {
+      // Fallback visual permanece na tela
+    }
+  }
+  showToast('Resumo gerado abaixo para cópia manual.');
 }
 
 function submitCheckout(mode) {
@@ -644,6 +682,7 @@ function submitCheckout(mode) {
   }
 
   const message = buildOrderMessage(cart.items, cart.getTotalAmount(), state.checkout);
+  state.generatedMessage = message;
 
   if (mode === 'whatsapp' && isWhatsappConfigured()) {
     const url = buildWhatsappOrderUrl(message);
@@ -661,7 +700,7 @@ function submitCheckout(mode) {
 }
 
 function bindEvents() {
-  // Mobile menu toggle
+  // Mobile menu toggle + Escape key
   const menuBtn = $('#mb');
   const mobileNav = $('#nav');
   menuBtn.addEventListener('click', () => {
@@ -674,6 +713,28 @@ function bindEvents() {
       menuBtn.setAttribute('aria-expanded', 'false');
     }
   });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mobileNav.classList.contains('on')) {
+      mobileNav.classList.remove('on');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      menuBtn.focus();
+    }
+  });
+
+  // Image error fallback
+  document.addEventListener(
+    'error',
+    (e) => {
+      if (e.target?.tagName === 'IMG') {
+        const frame = e.target.closest('.im, .hv-frame');
+        if (frame) {
+          frame.classList.add('im-error');
+          e.target.style.visibility = 'hidden';
+        }
+      }
+    },
+    true
+  );
 
   // Category strip
   $('#cl').addEventListener('click', (e) => {
@@ -802,13 +863,23 @@ function bindEvents() {
     const dec = e.target.closest('[data-cart-dec]');
     if (dec) {
       cart.decrement(Number(dec.dataset.cartDec));
+      state.generatedMessage = '';
       updateCartUI();
       return;
     }
     const inc = e.target.closest('[data-cart-inc]');
     if (inc) {
       cart.increment(Number(inc.dataset.cartInc));
+      state.generatedMessage = '';
       updateCartUI();
+      return;
+    }
+    const rem = e.target.closest('[data-cart-remove]');
+    if (rem) {
+      cart.remove(Number(rem.dataset.cartRemove));
+      state.generatedMessage = '';
+      updateCartUI();
+      showToast('Item removido do carrinho');
     }
   });
 
@@ -817,9 +888,12 @@ function bindEvents() {
     const field = e.target.name;
     if (!field || !(field in state.checkout)) return;
     state.checkout[field] = e.target.value;
+    state.generatedMessage = '';
     if (state.checkoutErrors[field]) {
       delete state.checkoutErrors[field];
       e.target.classList.remove('invalid');
+      e.target.setAttribute('aria-invalid', 'false');
+      e.target.removeAttribute('aria-describedby');
       const errSpan = e.target.parentElement?.querySelector('.co-err');
       if (errSpan) errSpan.remove();
     }
@@ -828,8 +902,20 @@ function bindEvents() {
   drawer.addEventListener('change', (e) => {
     const field = e.target.name;
     if (field === 'deliveryMethod' || field === 'paymentMethod') {
-      state.checkout[field] = e.target.value;
+      const val = e.target.value;
+      state.checkout[field] = val;
+      state.generatedMessage = '';
+      if (field === 'deliveryMethod' && val === 'Retirada') {
+        delete state.checkoutErrors.street;
+        delete state.checkoutErrors.number;
+        delete state.checkoutErrors.neighborhood;
+      }
+      const bodyEl = $('#cd-body');
+      const prevScroll = bodyEl ? bodyEl.scrollTop : 0;
       renderCartDrawer();
+      if (bodyEl) bodyEl.scrollTop = prevScroll;
+      const newRadio = drawer.querySelector(`input[name="${field}"][value="${val}"]`);
+      if (newRadio) newRadio.focus();
     }
   });
 

@@ -627,6 +627,18 @@ header {
   transition: transform 0.25s ease;
 }
 
+.im.im-error::after,
+.hv-frame.im-error::after {
+  content: "Imagem indisponível";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #e4ded5;
+  font-size: 13px;
+  background: #23170e;
+}
+
 .cd:hover .im img {
   transform: scale(1.04);
 }
@@ -1252,13 +1264,32 @@ input[type="range"] {
   grid-column: 1;
 }
 
+.li-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 6px;
+  grid-row: 1 / span 3;
+  grid-column: 2;
+}
+
 .q {
   display: flex;
   align-items: center;
   gap: 8px;
-  grid-row: 1 / span 3;
-  grid-column: 2;
-  align-self: center;
+}
+
+.li-remove {
+  background: none;
+  color: var(--m);
+  font-size: 12px;
+  text-decoration: underline;
+  padding: 2px 4px;
+}
+
+.li-remove:hover {
+  color: var(--err);
 }
 
 .q button {
@@ -1444,6 +1475,30 @@ input[type="range"] {
   padding: 10px 12px;
   font-size: 12.5px;
   margin-bottom: 10px;
+}
+
+.co-preview {
+  margin-top: 12px;
+  background: var(--g);
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.co-preview label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.co-preview textarea {
+  width: 100%;
+  border: 1px solid #d6d2cc;
+  border-radius: 6px;
+  padding: 8px;
+  font-size: 12.5px;
+  background: #fff;
+  resize: vertical;
 }
 
 /* Toast */
