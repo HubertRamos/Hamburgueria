@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Burguer do Hubert — Hambúrgueres artesanais da cidade</title>
+<meta name="description" content="Hambúrgueres artesanais com blend bovino de 180g, ingredientes frescos e entrega rápida. Monte seu pedido online.">
+<meta property="og:title" content="Burguer do Hubert">
+<meta property="og:description" content="Os melhores hambúrgueres artesanais da cidade.">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--k:#0e0e0e;--y:#f6a81c;--r:#e63e0f;--rd:#c8320a;--g:#f3f1ee;--t:#1c1c1c;--m:#6b6b6b;box-sizing:border-box;padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+html{background:var(--k);scroll-behavior:smooth;scroll-padding-top:calc(72px + env(safe-area-inset-top,0px))}
+body{margin:0;font:400 15px/1.45 Roboto,system-ui,sans-serif;color:var(--t);background:#fff}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--k);z-index:30}
+h1,h2,h3,.c{font-family:'Roboto Condensed','Arial Narrow',sans-serif;margin:0}
+button{font:inherit;cursor:pointer;border:0;color:inherit}
+:focus-visible{outline:3px solid var(--y);outline-offset:2px}
+a{color:inherit}
+.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+.btn{background:var(--r);color:#fff;font-weight:700;text-transform:uppercase;letter-spacing:.02em;border-radius:6px;padding:12px 18px;transition:background .15s,transform .1s;text-decoration:none;display:inline-block;text-align:center}
+.btn:hover{background:var(--rd)}.btn:active{transform:scale(.97)}
+.pill{border-radius:999px;padding:12px 26px}
+h2{font-size:clamp(22px,3vw,30px);font-weight:700;text-transform:uppercase;text-align:center;letter-spacing:.01em}
+/* header */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--k);color:#fff}
+.hb{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:72px}
+.ib{background:none;width:44px;height:44px;display:grid;place-items:center;border-radius:50%;position:relative}
+.ib:hover{background:#ffffff1a}
+.ib svg{width:26px;height:26px}
+.logo{display:flex;align-items:center;gap:8px;text-decoration:none;font:800 18px/1 'Roboto Condensed',sans-serif;text-transform:uppercase;letter-spacing:.03em}
+.logo svg{width:46px;height:38px}
+#cn{position:absolute;top:2px;right:0;background:var(--y);color:var(--k);font:700 12px/1 Roboto;min-width:18px;height:18px;border-radius:9px;display:grid;place-items:center;padding:0 4px}
+#cn:empty{display:none}
+#nav{display:none;background:#1a1a1a;border-top:1px solid #333}
+#nav.on{display:block}
+#nav a{display:block;padding:14px 20px;text-decoration:none;font-weight:500;border-bottom:1px solid #2a2a2a}
+#nav a:hover{color:var(--y)}
+/* hero */
+.hero{background:radial-gradient(60% 80% at 75% 55%,#3a2210,#0e0e0e 70%);color:#fff;overflow:hidden}
+.hg{display:grid;grid-template-columns:1.05fr .95fr;align-items:center;min-height:240px;gap:8px}
+.hero h1{font-weight:800;font-size:clamp(28px,6.4vw,68px);line-height:1.04;text-transform:uppercase}
+.hero h1 span{color:var(--y)}
+.hero .btn{margin-top:20px}
+.hv{position:relative;margin-right:-12%;padding:22px 0 8px}
+.hv svg.bg{width:100%;display:block;transform:rotate(-3deg);filter:drop-shadow(0 18px 24px #000a)}
+.hv .bd{position:absolute;left:4%;right:0;bottom:12px;height:28%;background:linear-gradient(#6a3d1c,#3c210e);border-radius:50%;z-index:-1}
+.hv .sp{position:absolute;top:2%;left:4%;width:12%;stroke:var(--y)}
+/* categories */
+.cats{background:var(--y);padding:28px 0 26px}
+.cl{display:flex;gap:6px;justify-content:center;margin-top:18px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none}
+.cl button{background:none;flex:0 0 auto;width:92px;text-align:center;font-weight:700;font-size:13px;color:var(--k);padding:6px 2px;border-radius:8px;line-height:1.15}
+.cl button:hover,.cl button.on{background:#0000001a}
+.cl svg{width:44px;height:44px;display:block;margin:0 auto 6px}
+/* menu */
+.menu{padding:36px 0 44px}
+.sr{display:flex;border:1px solid #d6d2cc;border-radius:6px;margin:20px auto 14px;max-width:760px;overflow:hidden;background:#fff}
+.sr input{flex:1;border:0;padding:14px 14px 14px 8px;font:inherit;min-width:0;outline:0}
+.sr:focus-within{border-color:var(--r)}
+.sr>svg{width:20px;margin:0 0 0 14px;align-self:center;color:var(--m)}
+.sr button{background:var(--r);color:#fff;width:52px;display:grid;place-items:center}
+.sr button svg{width:22px}
+.chips{display:flex;gap:8px;overflow-x:auto;max-width:760px;margin:0 auto 22px;scrollbar-width:none;padding-bottom:4px}
+.chips button{flex:0 0 auto;background:var(--g);border-radius:999px;padding:7px 15px;font-size:13px;font-weight:500}
+.chips button.on{background:var(--r);color:#fff}
+.gr{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px}
+.cd{background:#fff;border-radius:8px;box-shadow:0 2px 10px #0000001f;overflow:hidden;display:flex;flex-direction:column;position:relative}
+.im{display:block;width:100%;aspect-ratio:4/3;background:radial-gradient(70% 70% at 50% 60%,#5a3a22,#1a1008);cursor:pointer;border:0;padding:0}
+.cd:nth-child(3n+2) .im{background:radial-gradient(70% 70% at 50% 60%,#6b4a2c,#22140a)}
+.cd:nth-child(3n) .im{background:radial-gradient(70% 70% at 50% 60%,#7a5530,#2a190c)}
+.im svg{width:100%;height:100%;display:block;transition:transform .25s}
+.im:hover svg{transform:scale(1.05)}
+.cb{padding:12px 12px 14px;display:flex;flex-direction:column;gap:4px;flex:1}
+.cb h3{font:700 15px/1.2 Roboto,sans-serif;text-transform:uppercase;cursor:pointer;text-align:left;background:none;padding:0}
+.cb p{margin:0 0 8px;font-size:12.5px;color:var(--m);flex:1}
+.cb .btn{width:100%;padding:10px 8px;font-size:12.5px}
+.tag{position:absolute;top:10px;left:10px;background:var(--r);color:#fff;font:700 12px/1 'Roboto Condensed';letter-spacing:.04em;padding:6px 9px;border-radius:3px;text-transform:uppercase}
+.ep{text-align:center;color:var(--m);padding:30px 0}
+.pa{text-align:center;margin-top:30px}
+/* steps */
+.st{background:var(--y);padding:34px 0 38px}
+.sl{display:grid;grid-template-columns:repeat(5,1fr);margin-top:26px;position:relative}
+.sl::before{content:"";position:absolute;top:21px;left:10%;right:10%;height:3px;background:var(--r)}
+.sl div{text-align:center;position:relative;font-weight:500;font-size:13px;padding:0 4px}
+.sl b{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--r);color:#fff;margin:0 auto 8px;font:800 19px 'Roboto Condensed';border:3px solid var(--y)}
+/* diff */
+.df{background:var(--k);color:#fff;padding:40px 0 44px}
+.dl{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:28px;text-align:center}
+.dl svg{width:52px;height:52px;stroke:var(--r);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.dl h3{font-size:22px;margin:10px 0 6px;text-transform:none}
+.dl p{margin:0 auto;max-width:260px;font-size:13px;color:#bdbdbd}
+/* reviews */
+.rv{padding:40px 0 46px}
+.rl{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:26px}
+.rc{background:#fff;box-shadow:0 2px 10px #0000001f;border-radius:8px;padding:16px;display:grid;grid-template-columns:auto 1fr;gap:4px 12px;align-content:start}
+.av{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;font:800 22px 'Roboto Condensed';color:#fff;grid-row:span 2}
+.rc strong{align-self:end}
+.rc .s{color:var(--y);letter-spacing:2px;font-size:15px}
+.rc p{grid-column:1/-1;margin:8px 0 0;font-size:13.5px;color:#444}
+/* info */
+.if{background:var(--r);color:#fff;padding:30px 0}
+.il{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.il h3{font-size:17px;text-transform:uppercase;margin-bottom:10px;letter-spacing:.02em}
+.il p{margin:4px 0;font-size:14px}
+footer{background:var(--k);color:#fff;padding:32px 0 20px}
+.fl{display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;gap:24px}
+.fl h3{font-size:16px;text-transform:uppercase;margin-bottom:10px}
+.fl a{display:block;text-decoration:none;font-size:13px;color:#cfcfcf;padding:3px 0}
+.fl a:hover{color:var(--y)}
+.cp{border-top:1px solid #333;margin-top:24px;padding-top:14px;text-align:center;font-size:12px;color:#999}
+/* dialogs */
+dialog{border:0;padding:0;color:var(--t);background:#fff}
+dialog::backdrop{background:#000a}
+#pm{width:min(420px,100%);max-height:92dvh;border-radius:14px;overflow:auto;margin:auto}
+#pm .im{cursor:default;aspect-ratio:16/10}
+.px{position:absolute;top:10px;right:10px;background:#000a;color:#fff;width:36px;height:36px;border-radius:50%;font-size:20px}
+.pb{padding:16px 18px 20px}
+.pb h3{font-size:24px;text-transform:uppercase}
+.pb h4{margin:16px 0 6px;font:700 15px 'Roboto Condensed';text-transform:uppercase;letter-spacing:.03em}
+.sw{display:flex;justify-content:space-between;align-items:center;padding:7px 0;font-size:14px;border-bottom:1px solid #eee}
+.sw input{appearance:none;width:42px;height:24px;border-radius:12px;background:#ccc;position:relative;cursor:pointer;transition:background .15s;flex:none;margin:0}
+.sw input::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:transform .15s}
+.sw input:checked{background:var(--r)}.sw input:checked::after{transform:translateX(18px)}
+input[type=range]{width:100%;accent-color:var(--r)}
+.rg{display:flex;justify-content:space-between;font-size:12px;color:var(--m)}
+.sz{display:flex;gap:8px}
+.sz label{flex:1}
+.sz input{position:absolute;opacity:0}
+.sz span{display:block;text-align:center;border:2px solid #ddd;border-radius:6px;padding:8px;font-weight:700}
+.sz input:checked+span{border-color:var(--r);color:var(--r)}
+.sz input:focus-visible+span{outline:3px solid var(--y)}
+.pr{display:flex;justify-content:space-between;align-items:center;margin:16px 0 10px}
+.pr b{font:800 26px 'Roboto Condensed'}
+#cd{width:min(420px,100%);height:100dvh;max-height:100dvh;margin:0 0 0 auto;display:flex;flex-direction:column}
+#cd[open]{animation:sl .22s ease-out}
+@keyframes sl{from{transform:translateX(40px);opacity:0}}
+.ch{background:var(--r);color:#fff;display:flex;justify-content:space-between;align-items:center;padding:12px 16px;font:800 20px 'Roboto Condensed';text-transform:uppercase}
+.ch button{background:none;font-size:24px;width:36px;height:36px}
+#ci{flex:1;overflow:auto;padding:6px 16px}
+.li{display:grid;grid-template-columns:1fr auto;gap:2px 10px;padding:12px 0;border-bottom:1px solid #eee;font-size:14px}
+.li small{color:var(--m);grid-column:1}
+.q{display:flex;align-items:center;gap:8px;grid-row:span 2;grid-column:2}
+.q button{width:28px;height:28px;border-radius:50%;background:var(--g);font-weight:700}
+.cf{padding:14px 16px calc(16px + env(safe-area-inset-bottom,0px));border-top:1px solid #eee}
+.tt{display:flex;justify-content:space-between;font:700 18px 'Roboto Condensed';text-transform:uppercase;margin-bottom:12px}
+.seg{display:grid;grid-template-columns:1fr 1fr;background:var(--g);border-radius:999px;padding:3px;margin-bottom:12px}
+.seg label{text-align:center}
+.seg input,.pg input{position:absolute;opacity:0}
+.seg span{display:block;padding:9px;border-radius:999px;font-weight:700;font-size:13px;text-transform:uppercase;cursor:pointer}
+.seg input:checked+span{background:var(--r);color:#fff}
+.pg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.pg span{display:block;text-align:center;border:2px solid #ddd;border-radius:6px;padding:10px 4px;font-weight:700;font-size:13px;cursor:pointer}
+.pg input:checked+span{border-color:var(--r);background:#fff1ec;color:var(--r)}
+.pg input:focus-visible+span,.seg input:focus-visible+span{outline:3px solid var(--y)}
+.btn[aria-disabled=true]{opacity:.45;pointer-events:none}
+.cf .btn{display:block;width:100%}
+#ts{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:var(--k);color:#fff;padding:11px 18px;border-radius:999px;font-weight:500;opacity:0;pointer-events:none;transition:.25s;z-index:99}
+#ts.on{opacity:1;transform:translate(-50%,0)}
+@media(max-width:820px){
+.dl,.il{grid-template-columns:1fr}.dl{gap:24px}
+.rl{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin-right:-20px;padding-right:20px;scrollbar-width:none}
+.rc{flex:0 0 82%;scroll-snap-align:start}
+.fl{grid-template-columns:1fr 1fr}
+.cl{justify-content:flex-start}
+.gr{grid-template-columns:repeat(2,1fr);gap:12px}
+.cb{padding:10px}.cb h3{font-size:13px}.cb p{font-size:11.5px}
+.sl div{font-size:11px}.sl b{width:38px;height:38px;font-size:16px}.sl::before{top:19px}
+.hv{margin-right:-20%}
+}
+@media(min-width:821px){.cl{gap:18px}.cl button{width:116px}.hg{min-height:420px}.hv{margin-right:-4%}.hero .btn{padding:14px 34px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<linearGradient id="gb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4b04a"/><stop offset="1" stop-color="#c0701a"/></linearGradient>
+<linearGradient id="gp" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6b3a1e"/><stop offset="1" stop-color="#2e170b"/></linearGradient></defs>
+<symbol id="burger" viewBox="0 0 220 180">
+<ellipse cx="110" cy="166" rx="92" ry="8" fill="#000" opacity=".35"/>
+<path d="M22 128h176c0 16-12 26-30 26H52c-18 0-30-10-30-26z" fill="#d48a30"/>
+<rect x="16" y="106" width="188" height="24" rx="12" fill="url(#gp)"/>
+<path d="M24 100h172l-10 4-12 18-12-16-16 12-14-14-18 14-16-14-14 14-12-12-14 14z" fill="#f7b92a"/>
+<path d="M14 94q8-12 16-2t16 0 16-2 16 2 16-2 16 2 16-2 16 2 16-2 16 2 16-2 10 4v10H14z" fill="#6bb52f"/>
+<rect x="24" y="82" width="172" height="13" rx="6" fill="#d8321f"/>
+<rect x="26" y="74" width="168" height="9" rx="4.5" fill="#8c2f7a"/>
+<path d="M18 76C18 30 60 8 110 8s92 22 92 68z" fill="url(#gb)"/>
+<path d="M40 52C52 30 80 20 104 20" stroke="#fff" stroke-width="6" stroke-linecap="round" fill="none" opacity=".22"/>
+<g fill="#fbe5b4"><ellipse cx="80" cy="32" rx="5" ry="2.5" transform="rotate(-25 80 32)"/><ellipse cx="112" cy="24" rx="5" ry="2.5"/><ellipse cx="144" cy="34" rx="5" ry="2.5" transform="rotate(25 144 34)"/><ellipse cx="96" cy="50" rx="5" ry="2.5" transform="rotate(-10 96 50)"/><ellipse cx="130" cy="52" rx="5" ry="2.5" transform="rotate(15 130 52)"/><ellipse cx="62" cy="56" rx="5" ry="2.5" transform="rotate(-35 62 56)"/><ellipse cx="162" cy="58" rx="5" ry="2.5" transform="rotate(35 162 58)"/></g>
+</symbol>
+<symbol id="dog" viewBox="0 0 220 180">
+<ellipse cx="110" cy="160" rx="95" ry="8" fill="#000" opacity=".35"/>
+<rect x="20" y="86" width="180" height="56" rx="28" fill="#c9822c"/>
+<rect x="8" y="76" width="204" height="30" rx="15" fill="#b8741f" transform="rotate(-6 110 90)"/>
+<rect x="14" y="66" width="192" height="34" rx="17" fill="#8a2b18" transform="rotate(-6 110 83)"/>
+<path d="M30 80q16-14 32 0t32 0 32 0 32 0 28-4" stroke="#f1c21b" stroke-width="7" fill="none" stroke-linecap="round" transform="rotate(-6 110 83)"/>
+<rect x="20" y="96" width="180" height="46" rx="23" fill="#e0a04a" opacity=".55"/>
+</symbol>
+<symbol id="fries" viewBox="0 0 220 180">
+<ellipse cx="110" cy="166" rx="80" ry="7" fill="#000" opacity=".35"/>
+<g fill="#f4c32e"><rect x="62" y="40" width="14" height="80" rx="4" transform="rotate(-14 69 80)"/><rect x="82" y="26" width="14" height="94" rx="4" transform="rotate(-6 89 80)"/><rect x="104" y="20" width="14" height="100" rx="4"/><rect x="126" y="28" width="14" height="92" rx="4" transform="rotate(7 133 80)"/><rect x="146" y="42" width="14" height="78" rx="4" transform="rotate(15 153 80)"/><rect x="94" y="34" width="14" height="86" rx="4" fill="#e8b21f" transform="rotate(-2 101 80)"/></g>
+<path d="M50 100h120l-12 62H62z" fill="#d62b14"/><path d="M92 112h36v26H92z" fill="#fff" opacity=".9" rx="3"/>
+</symbol>
+<symbol id="cup" viewBox="0 0 220 180">
+<ellipse cx="110" cy="168" rx="52" ry="6" fill="#000" opacity=".35"/>
+<path d="M70 52h80l-10 112H80z" fill="currentColor"/><path d="M76 96h68l-3 36H79z" fill="#fff" opacity=".85"/>
+<rect x="62" y="38" width="96" height="16" rx="6" fill="#f5f5f5"/><path d="M118 38l14-26h24" stroke="#f5f5f5" stroke-width="7" fill="none" stroke-linecap="round"/>
+<path d="M82 62h8l-4 90h-8z" fill="#fff" opacity=".18"/>
+</symbol>
+<symbol id="cox" viewBox="0 0 220 180">
+<ellipse cx="110" cy="166" rx="70" ry="7" fill="#000" opacity=".35"/>
+<path d="M110 14C150 60 172 108 148 146Q110 168 72 146C48 108 70 60 110 14z" fill="#d9922b"/>
+<path d="M92 50C84 76 74 100 82 128" stroke="#fff" stroke-width="7" opacity=".25" fill="none" stroke-linecap="round"/>
+<path d="M96 132q14 8 30 0" stroke="#a96413" stroke-width="5" fill="none" stroke-linecap="round"/>
+</symbol></svg>
+
+<header>
+<div class="wrap hb">
+<div><button class="ib" id="mb" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button></div>
+<a class="logo" href="#topo" aria-label="Burguer do Hubert"><svg viewBox="0 0 220 180"><use href="#burger"/></svg><span>Burguer<br>do Hubert</span></a>
+<div style="justify-self:end"><button class="ib" id="oc" aria-label="Abrir carrinho"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h3l2.4 11h10l2-8H7"/><circle cx="9.5" cy="19.5" r="1.4"/><circle cx="17.5" cy="19.5" r="1.4"/></svg><span id="cn"></span></button></div>
+</div>
+<nav id="nav" aria-label="Principal"><a href="#cardapio">Cardápio</a><a href="#como">Como pedir</a><a href="#diferenciais">Diferenciais</a><a href="#avaliacoes">Avaliações</a><a href="#contato">Contato</a></nav>
+</header>
+
+<main id="topo">
+<section class="hero"><div class="wrap hg">
+<div><h1>Os melhores<br><span>hambúrgueres</span><br>artesanais<br>da cidade!</h1><a class="btn pill" href="#cardapio">Peça agora</a></div>
+<div class="hv"><svg class="sp" viewBox="0 0 40 40" fill="none" stroke-width="3" stroke-linecap="round"><path d="M4 30 16 18M14 36 22 14M24 38 34 22" transform="translate(0 -4)"/></svg><div class="bd"></div><svg class="bg" viewBox="0 0 220 180" role="img" aria-label="Hambúrguer artesanal com queijo, tomate e cebola roxa"><use href="#burger"/></svg></div>
+</div></section>
+
+<section class="cats" aria-labelledby="tc"><div class="wrap"><h2 id="tc">Categorias</h2><div class="cl" id="cl"></div></div></section>
+
+<section class="menu" id="cardapio"><div class="wrap">
+<h2>Cardápio</h2>
+<div class="sr" role="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input id="q" type="search" placeholder="O que você quer comer?" aria-label="Buscar no cardápio"><button id="so" aria-label="Ordenar por preço" title="Ordenar por preço"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M7 12h10M10 17h4"/></svg></button></div>
+<div class="chips" id="ch"></div>
+<div class="gr" id="gr" aria-live="polite"></div>
+<div class="pa"><button class="btn pill" id="pa">Peça agora</button></div>
+</div></section>
+
+<section class="st" id="como"><div class="wrap"><h2>Como pedir</h2>
+<div class="sl"><div><b>1</b>Escolha</div><div><b>2</b>Personalize</div><div><b>3</b>Preparo rápido</div><div><b>4</b>Entrega</div><div><b>5</b>Saboreie</div></div></div></section>
+
+<section class="df" id="diferenciais"><div class="wrap"><h2>Por que o Hubert</h2>
+<div class="dl">
+<div><svg viewBox="0 0 48 48"><path d="M10 38C10 18 22 8 40 8c0 18-10 30-30 30z"/><path d="M10 40 28 20"/></svg><h3>Ingredientes frescos</h3><p>Carne moída no dia, pão assado toda manhã e legumes selecionados.</p></div>
+<div><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="16"/><path d="M24 14v10l7 4"/></svg><h3>Entrega rápida</h3><p>Seu pedido sai quentinho da chapa e chega embalado para manter o ponto.</p></div>
+<div><svg viewBox="0 0 48 48"><circle cx="24" cy="19" r="11"/><path d="m18 29-4 14 10-5 10 5-4-14"/></svg><h3>Tradição e qualidade</h3><p>Receita da casa, blend bovino de 180g e o mesmo cuidado desde o primeiro dia.</p></div>
+</div></div></section>
+
+<section class="rv" id="avaliacoes"><div class="wrap"><h2>O que dizem os clientes</h2>
+<div class="rl">
+<article class="rc"><span class="av" style="background:#c8320a">A</span><strong>Ana K.</strong><span class="s" aria-label="5 estrelas">★★★★★</span><p>“Carne suculenta, pão macio e o queijo derretido do jeito certo. Pedi no sábado e já repeti na terça.”</p></article>
+<article class="rc"><span class="av" style="background:#2d6a4f">R</span><strong>Rafael M.</strong><span class="s" aria-label="5 estrelas">★★★★★</span><p>“Chegou rápido e ainda quente. Escolhi o ponto da carne no pedido e veio exatamente como pedi.”</p></article>
+<article class="rc"><span class="av" style="background:#6a3d9a">K</span><strong>Kora L.</strong><span class="s" aria-label="5 estrelas">★★★★★</span><p>“O combo clássico é o meu favorito. Batata crocante e hambúrguer que parece de restaurante.”</p></article>
+</div></div></section>
+
+<section class="if" id="contato"><div class="wrap il">
+<div><h3>Horário de atendimento</h3><p>Terça a domingo: 18:00 às 23:30</p><p>Segunda: fechado</p></div>
+<div><h3>Endereço</h3><p>Rua das Palmeiras, 227<br>Centro — Sua Cidade</p></div>
+<div><h3>Contato</h3><p><a href="#" id="wl">WhatsApp</a></p><p>contato@burguerdohubert.com.br</p></div>
+</div></section>
+</main>
+
+<footer><div class="wrap"><div class="fl">
+<div><h3>Burguer do Hubert</h3><p style="font-size:13px;color:#cfcfcf;margin:0;max-width:240px">Hambúrgueres artesanais feitos na hora, do jeito que você pede.</p></div>
+<div><h3>Navegação</h3><a href="#cardapio">Cardápio</a><a href="#como">Como pedir</a><a href="#avaliacoes">Avaliações</a></div>
+<div><h3>Pedidos</h3><a href="#" id="wl2">Pedir pelo WhatsApp</a><a href="#diferenciais">Nossos diferenciais</a></div>
+<div><h3>Atendimento</h3><a href="#contato">Horários</a><a href="#contato">Endereço</a></div>
+</div><div class="cp">© 2026 Burguer do Hubert. Todos os direitos reservados.</div></div></footer>
+
+<dialog id="pm" aria-labelledby="pt"></dialog>
+<dialog id="cd" aria-label="Carrinho">
+<div class="ch"><span>Meu carrinho</span><button id="xc" aria-label="Fechar carrinho">×</button></div>
+<div id="ci"></div>
+<div class="cf">
+<div class="tt"><span>Total</span><span id="tot">R$ 0,00</span></div>
+<div class="seg" role="radiogroup" aria-label="Forma de recebimento"><label><input type="radio" name="md" value="Entrega" checked><span>Entrega</span></label><label><input type="radio" name="md" value="Retirada"><span>Retirada</span></label></div>
+<div class="pg" role="radiogroup" aria-label="Pagamento"><label><input type="radio" name="pg" value="PIX" checked><span>PIX</span></label><label><input type="radio" name="pg" value="Cartão"><span>Cartão</span></label><label><input type="radio" name="pg" value="Dinheiro"><span>Dinheiro</span></label></div>
+<a class="btn" id="fin" href="#" target="_blank" rel="noopener" aria-disabled="true">Finalizar pelo WhatsApp</a>
+</div></dialog>
+<div id="ts" role="status"></div>
+
+<script>
+/* Troque pelo número real, com DDI+DDD (ex.: 5511999998888) */
+const WA='5500000000000';
+const R=n=>'R$ '+n.toFixed(2).replace('.',',');
+const $=s=>document.querySelector(s);
+const IC={
+ham:'<path d="M8 22c0-8 7-13 16-13s16 5 16 13z"/><path d="M6 29h36M9 35h30c0 4-3 6-7 6H16c-4 0-7-2-7-6z"/>',
+dog:'<path d="M10 34 34 10a5 5 0 0 1 7 7L17 41a5 5 0 0 1-7-7z"/><path d="M16 28l6 6M24 20l6 6"/>',
+com:'<path d="M14 18h20l-3 24H17z"/><path d="M12 18h24M24 18l3-10h6"/>',
+por:'<path d="M8 24h32l-4 16H12z"/><path d="M14 24l-2-10M21 24l-1-13M28 24l1-13M35 24l2-10"/>',
+sal:'<path d="M24 6c8 10 13 16 13 24a13 13 0 0 1-26 0c0-8 5-14 13-24z"/>',
+beb:'<path d="M20 6h8v8l4 6v22H16V20l4-6z"/><path d="M16 28h16"/>',
+sob:'<path d="M12 26h24l-3 16H15z"/><path d="M13 26c-2-8 4-12 8-12 1-5 9-5 10 0 5 0 10 4 4 12"/>'};
+const CATS=[['ham','Hambúrgueres'],['dog','Cachorros-quentes'],['com','Combos'],['por','Porções'],['sal','Salgados'],['beb','Bebidas'],['sob','Sobremesas']];
+const bi=['Blend bovino','Queijo prato','Tomate','Alface','Cebola roxa','Molho da casa'];
+const P=[];let n=0;
+const add=(c,t,d,p,v,ing=[],promo=0,col)=>P.push({id:++n,c,t,d,p,v,ing,promo,col});
+add('ham','O Clássico','Blend bovino 180g, queijo prato, alface, tomate',28,'burger',bi);
+add('ham','Cheddar Bacon','Blend bovino 180g, cheddar, bacon crocante, cebola roxa',33,'burger',['Blend bovino','Cheddar','Bacon','Cebola roxa','Molho barbecue'],1);
+add('ham','Duplo Smash','Dois smash de 90g, queijo prato duplo, picles, molho da casa',36,'burger',['Smash 90g','Smash 90g','Queijo prato','Picles','Molho da casa']);
+add('ham','Picanha Grill','Blend de picanha 180g, queijo coalho, rúcula, tomate',39,'burger',['Blend de picanha','Queijo coalho','Rúcula','Tomate','Maionese defumada']);
+add('ham','Frango Crocante','Filé de frango empanado, queijo prato, alface, maionese',29,'burger',['Frango empanado','Queijo prato','Alface','Maionese']);
+add('ham','Veggie Grill','Hambúrguer de grão-de-bico, tomate, rúcula, molho verde',30,'burger',['Hambúrguer de grão-de-bico','Tomate','Rúcula','Molho verde']);
+add('dog','Dog Tradicional','Salsicha artesanal, purê, vinagrete, batata palha',18,'dog',['Salsicha','Purê','Vinagrete','Batata palha']);
+add('dog','Dog Duplo','Duas salsichas, queijo derretido, bacon, batata palha',24,'dog',['Salsicha','Salsicha','Queijo','Bacon','Batata palha'],1);
+add('com','Combo Clássico','O Clássico + batata média + refrigerante lata',42,'combo',[],1);
+add('com','Combo Duplo','Duplo Smash + batata grande + refrigerante lata',54,'combo');
+add('por','Batata Frita','Porção crocante com sal e páprica',20,'fries');
+add('por','Batata com Cheddar','Batata frita coberta com cheddar e bacon',26,'fries');
+add('sal','Coxinha de Frango','Massa leve e recheio cremoso, frita na hora',8,'cox');
+add('sal','Coxinha de Costela','Costela desfiada com catupiry',10,'cox');
+add('beb','Refrigerante lata','350ml, escolha no atendimento',6,'cup','#c8320a');
+add('beb','Suco natural','Laranja ou limão, 400ml',9,'cup','#f0a21a');
+add('sob','Milkshake','Chocolate ou morango, 400ml',16,'cup','#e0558a');
+add('sob','Brownie','Brownie de chocolate meio amargo com sorvete',14,'cox');
+const art=p=>{const v=p.v;let u;
+if(v=='combo')u='<use href="#burger" transform="translate(-26 4) scale(.78)"/><use href="#fries" transform="translate(88 18) scale(.6)"/>';
+else if(v=='cup')u=`<use href="#cup" style="color:${p.col}" transform="translate(30 6) scale(.85)"/>`;
+else u=`<use href="#${v}" transform="translate(11 9) scale(.9)"/>`;
+return `<svg viewBox="0 0 220 180" role="img" aria-label="${p.t}">${u}</svg>`};
+let cat='ham',qs='',sort=0,cart=[];
+$('#cl').innerHTML=CATS.map(([k,l])=>`<button data-c="${k}"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">${IC[k]}</svg>${l}</button>`).join('');
+$('#ch').innerHTML=CATS.slice(0,5).concat(CATS.slice(5)).map(([k,l])=>`<button data-c="${k}">${l}</button>`).join('');
+function draw(){
+document.querySelectorAll('[data-c]').forEach(b=>b.classList.toggle('on',b.dataset.c==cat&&!qs));
+let l=P.filter(p=>qs?(p.t+p.d).toLowerCase().includes(qs):p.c==cat);
+if(sort)l=l.slice().sort((a,b)=>(a.p-b.p)*sort);
+$('#gr').innerHTML=l.length?l.map(p=>`<article class="cd">${p.promo?'<span class="tag">Promoção</span>':''}<button class="im" data-o="${p.id}" aria-label="Personalizar ${p.t}">${art(p)}</button><div class="cb"><h3 data-o="${p.id}" tabindex="0" role="button">${p.t} - ${R(p.p)}</h3><p>${p.d}</p><button class="btn" data-a="${p.id}">Adicionar ao carrinho</button></div></article>`).join(''):'<p class="ep" style="grid-column:1/-1">Nada encontrado para essa busca. Tente outro nome ou escolha uma categoria.</p>'}
+draw();
+document.addEventListener('click',e=>{
+const c=e.target.closest('[data-c]');if(c){cat=c.dataset.c;qs='';$('#q').value='';draw();if(c.closest('#cl'))$('#cardapio').scrollIntoView();return}
+const o=e.target.closest('[data-o]');if(o)return openP(+o.dataset.o);
+const a=e.target.closest('[data-a]');if(a){const p=P.find(x=>x.id==a.dataset.a);addC(p,{off:[],pt:1,sz:'M'})}});
+document.addEventListener('keydown',e=>{if(e.key=='Enter'&&e.target.dataset.o)openP(+e.target.dataset.o)});
+$('#q').addEventListener('input',e=>{qs=e.target.value.trim().toLowerCase();draw()});
+$('#so').onclick=()=>{sort=sort==1?-1:1;toast(sort==1?'Menor preço primeiro':'Maior preço primeiro');draw()};
+$('#mb').onclick=()=>{const on=$('#nav').classList.toggle('on');$('#mb').setAttribute('aria-expanded',on)};
+$('#nav').onclick=()=>{$('#nav').classList.remove('on');$('#mb').setAttribute('aria-expanded',false)};
+function toast(t){const s=$('#ts');s.textContent=t;s.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>s.classList.remove('on'),1800)}
+/* personalização */
+const hasSz=p=>['ham','dog','por'].includes(p.c),PT=['Malpassado','Ao ponto','Bem passado'];
+function openP(id){const p=P.find(x=>x.id==id),d=$('#pm');
+d.innerHTML=`<div style="position:relative"><div class="im">${art(p)}</div><button class="px" aria-label="Fechar" data-x>×</button></div><div class="pb"><h3 id="pt">${p.t}</h3><p style="margin:4px 0 0;color:#6b6b6b;font-size:13px">${p.d}</p>
+${p.ing.length?`<h4>Ingredientes</h4>${p.ing.map((g,i)=>`<label class="sw">${g}<input type="checkbox" checked data-i="${i}"></label>`).join('')}`:''}
+${p.c=='ham'?`<h4>Ponto da carne</h4><input type="range" min="0" max="2" value="1" id="pt2" aria-label="Ponto da carne"><div class="rg">${PT.map(x=>`<span>${x}</span>`).join('')}</div>`:''}
+${hasSz(p)?`<h4>Tamanho</h4><div class="sz"><label><input type="radio" name="sz" value="M" checked><span>Médio</span></label><label><input type="radio" name="sz" value="G"><span>Grande +R$ 4,00</span></label></div>`:''}
+<div class="pr"><span>Preço</span><b id="pp">${R(p.p)}</b></div><button class="btn" style="width:100%" id="pad">Adicionar ao carrinho</button></div>`;
+const get=()=>({off:[...d.querySelectorAll('[data-i]')].filter(x=>!x.checked).map(x=>p.ing[x.dataset.i]),pt:p.c=='ham'?+d.querySelector('#pt2').value:-1,sz:hasSz(p)?d.querySelector('[name=sz]:checked').value:''});
+d.onchange=()=>{$('#pp').textContent=R(p.p+(get().sz=='G'?4:0))};
+d.onclick=e=>{if(e.target.dataset.x!==undefined||e.target==d)d.close()};
+$('#pad').onclick=()=>{addC(p,get());d.close()};
+d.showModal()}
+/* carrinho */
+function addC(p,o){const k=p.id+JSON.stringify(o),pr=p.p+(o.sz=='G'?4:0),x=cart.find(i=>i.k==k);
+x?x.q++:cart.push({k,p,o,pr,q:1});upd();toast(p.t+' no carrinho')}
+function desc(i){const o=i.o,a=[];if(o.off.length)a.push('sem '+o.off.join(', '));if(o.pt>=0)a.push(PT[o.pt]);if(o.sz)a.push(o.sz=='G'?'Grande':'Médio');return a.join(' · ')}
+function upd(){const q=cart.reduce((s,i)=>s+i.q,0),t=cart.reduce((s,i)=>s+i.q*i.pr,0);
+$('#cn').textContent=q||'';$('#tot').textContent=R(t);
+$('#ci').innerHTML=cart.length?cart.map((i,x)=>`<div class="li"><strong>${i.p.t}</strong><div class="q"><button data-m="${x}" aria-label="Diminuir">−</button>${i.q}<button data-p="${x}" aria-label="Aumentar">+</button></div><small>${desc(i)} · ${R(i.pr*i.q)}</small></div>`).join(''):'<p class="ep">Seu carrinho está vazio. Escolha um hambúrguer no cardápio.</p>';
+const f=$('#fin');f.setAttribute('aria-disabled',!cart.length);
+const md=document.querySelector('[name=md]:checked').value,pg=document.querySelector('[name=pg]:checked').value;
+const msg='Olá! Quero fazer um pedido:\n'+cart.map(i=>`${i.q}x ${i.p.t}${desc(i)?' ('+desc(i)+')':''} - ${R(i.pr*i.q)}`).join('\n')+`\nTotal: ${R(t)}\n${md} | Pagamento: ${pg}`;
+f.href='https://wa.me/'+WA+'?text='+encodeURIComponent(msg);
+['#wl','#wl2'].forEach(s=>$(s).href='https://wa.me/'+WA)}
+$('#ci').onclick=e=>{const m=e.target.dataset.m,p=e.target.dataset.p;if(m!==undefined){--cart[m].q||cart.splice(m,1)}else if(p!==undefined)cart[p].q++;else return;upd()};
+$('#cd').addEventListener('change',upd);
+const dc=$('#cd');$('#oc').onclick=()=>dc.showModal();$('#pa').onclick=()=>dc.showModal();$('#xc').onclick=()=>dc.close();
+dc.addEventListener('click',e=>{if(e.target==dc)dc.close()});
+upd();
+</script>
+</body>
+</html>
