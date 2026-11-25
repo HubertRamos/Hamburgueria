@@ -44,7 +44,7 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:va
 .hero h1 span{color:var(--y)}
 .hero .btn{margin-top:20px}
 .hv{position:relative;margin-right:-12%;padding:22px 0 8px}
-.hv svg.bg{width:100%;display:block;transform:rotate(-3deg);filter:drop-shadow(0 18px 24px #000a)}
+.hv img.bg{width:100%;display:block;object-fit:contain;transform:rotate(-3deg);filter:drop-shadow(0 18px 24px #000a);border-radius:14px}
 .hv .bd{position:absolute;left:4%;right:0;bottom:12px;height:28%;background:linear-gradient(#6a3d1c,#3c210e);border-radius:50%;z-index:-1}
 .hv .sp{position:absolute;top:2%;left:4%;width:12%;stroke:var(--y)}
 /* categories */
@@ -69,8 +69,8 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:va
 .im{display:block;width:100%;aspect-ratio:4/3;background:radial-gradient(70% 70% at 50% 60%,#5a3a22,#1a1008);cursor:pointer;border:0;padding:0}
 .cd:nth-child(3n+2) .im{background:radial-gradient(70% 70% at 50% 60%,#6b4a2c,#22140a)}
 .cd:nth-child(3n) .im{background:radial-gradient(70% 70% at 50% 60%,#7a5530,#2a190c)}
-.im svg{width:100%;height:100%;display:block;transition:transform .25s}
-.im:hover svg{transform:scale(1.05)}
+.im img{width:100%;height:100%;display:block;object-fit:cover;transition:transform .25s}
+.im:hover img{transform:scale(1.05)}
 .cb{padding:12px 12px 14px;display:flex;flex-direction:column;gap:4px;flex:1}
 .cb h3{font:700 15px/1.2 Roboto,sans-serif;text-transform:uppercase;cursor:pointer;text-align:left;background:none;padding:0}
 .cb p{margin:0 0 8px;font-size:12.5px;color:var(--m);flex:1}
@@ -226,7 +226,7 @@ input[type=range]{width:100%;accent-color:var(--r)}
 <main id="topo">
 <section class="hero"><div class="wrap hg">
 <div><h1>Os melhores<br><span>hambúrgueres</span><br>artesanais<br>da cidade!</h1><a class="btn pill" href="#cardapio">Peça agora</a></div>
-<div class="hv"><svg class="sp" viewBox="0 0 40 40" fill="none" stroke-width="3" stroke-linecap="round"><path d="M4 30 16 18M14 36 22 14M24 38 34 22" transform="translate(0 -4)"/></svg><div class="bd"></div><svg class="bg" viewBox="0 0 220 180" role="img" aria-label="Hambúrguer artesanal com queijo, tomate e cebola roxa"><use href="#burger"/></svg></div>
+<div class="hv"><svg class="sp" viewBox="0 0 40 40" fill="none" stroke-width="3" stroke-linecap="round"><path d="M4 30 16 18M14 36 22 14M24 38 34 22" transform="translate(0 -4)"/></svg><div class="bd"></div><img class="bg" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1000&q=85" alt="Hambúrguer artesanal com queijo, alface e tomate" fetchpriority="high"></div>
 </div></section>
 
 <section class="cats" aria-labelledby="tc"><div class="wrap"><h2 id="tc">Categorias</h2><div class="cl" id="cl"></div></div></section>
@@ -317,11 +317,21 @@ add('beb','Refrigerante lata','350ml, escolha no atendimento',6,'cup','#c8320a')
 add('beb','Suco natural','Laranja ou limão, 400ml',9,'cup','#f0a21a');
 add('sob','Milkshake','Chocolate ou morango, 400ml',16,'cup','#e0558a');
 add('sob','Brownie','Brownie de chocolate meio amargo com sorvete',14,'cox');
-const art=p=>{const v=p.v;let u;
-if(v=='combo')u='<use href="#burger" transform="translate(-26 4) scale(.78)"/><use href="#fries" transform="translate(88 18) scale(.6)"/>';
-else if(v=='cup')u=`<use href="#cup" style="color:${p.col}" transform="translate(30 6) scale(.85)"/>`;
-else u=`<use href="#${v}" transform="translate(11 9) scale(.9)"/>`;
-return `<svg viewBox="0 0 220 180" role="img" aria-label="${p.t}">${u}</svg>`};
+const PHOTOS={
+ burger:['photo-1568901346375-23c9450c58cd','photo-1550547660-d9450f859349','photo-1571091718767-18b5b1457add','photo-1561758033-d89a9ad46330','photo-1553979459-d2229ba7433a'],
+ dog:['photo-1612392062631-94dd858cba88'],
+ combo:['photo-1550547660-d9450f859349'],
+ fries:['photo-1573080496219-bb080dd4f877'],
+ cox:['photo-1601050690597-df0568f70950'],
+ cup:['photo-1527960471264-932f39eb5846'],
+ dessert:['photo-1606313564200-e75d5e30476c']
+};
+const art=p=>{
+ const group=p.v==='burger'?'burger':p.v==='dog'?'dog':p.v==='combo'?'combo':p.v==='fries'?'fries':p.v==='cox'?'cox':p.v==='cup'?(p.c==='sob'?'dessert':'cup'):'burger';
+ const list=PHOTOS[group],photo=list[(p.id-1)%list.length];
+ const src='https://images.unsplash.com/'+photo+'?auto=format&fit=crop&w=900&q=82';
+ return '<img src="'+src+'" alt="'+p.t.replace(/"/g,'&quot;')+'" loading="lazy" decoding="async">';
+};
 let cat='ham',qs='',sort=0,cart=[];
 $('#cl').innerHTML=CATS.map(([k,l])=>`<button data-c="${k}"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">${IC[k]}</svg>${l}</button>`).join('');
 $('#ch').innerHTML=CATS.slice(0,5).concat(CATS.slice(5)).map(([k,l])=>`<button data-c="${k}">${l}</button>`).join('');
